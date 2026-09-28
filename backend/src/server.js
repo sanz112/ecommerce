@@ -3,9 +3,20 @@ import { ENV } from "./config/env.js"
 import path from "path"
 import connectDB from "./config/db.js";
 import { clerkMiddleware } from '@clerk/express'
+
+import { serve } from "inngest/express";
+
+import { functions, inngest } from "./config/inngest.js";
+
+
 const app = express();
 
 const __dirname = path.resolve();
+app.use(express.json());
+
+const serv = serve({client:inngest, functions: functions});
+
+app.use("/api/inngest", serv);
 
 app.use(clerkMiddleware());
 
