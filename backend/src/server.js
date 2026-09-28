@@ -14,13 +14,12 @@ const app = express();
 const __dirname = path.resolve();
 app.use(express.json());
 
-const serv = serve({client:inngest, functions: functions});
 
-app.use("/api/inngest", serv);
+app.use("/api/inngest", serve({client:inngest, functions}));
 
 app.use(clerkMiddleware());
 
-app.get("/api/health", (req, res) => {
+app.get("/api/news", (req, res) => {
   res.status(200).json({ status: "ok" })
 })   
 
